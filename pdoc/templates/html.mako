@@ -1,5 +1,6 @@
 <%
   import os
+  import glob
 
   import pdoc
   from pdoc.html_helpers import extract_toc, glimpse, to_html as _to_html, format_git_link
@@ -23,6 +24,12 @@
     if annot:
         annot = ' ' + sep + '\N{NBSP}' + annot
     return annot
+    
+  # Get codeboarding files if they exist
+  codeboarding_files = []
+  codeboarding_dir = os.path.join(os.getcwd(), '.codeboarding')
+  if os.path.exists(codeboarding_dir):
+    codeboarding_files = [os.path.basename(f) for f in glob.glob(os.path.join(codeboarding_dir, '*.html'))]
 %>
 
 <%def name="ident(name)"><span class="ident">${name}</span></%def>
@@ -352,6 +359,16 @@
           ${show_column_list(members)}
         % endif
         </li>
+      % endfor
+      </ul>
+    </li>
+    % endif
+    
+    % if codeboarding_files:
+    <li><h3>Codeboardings</h3>
+      <ul>
+      % for file in codeboarding_files:
+        <li><a href="${file}"><code>${os.path.splitext(file)[0]}</code></a></li>
       % endfor
       </ul>
     </li>
