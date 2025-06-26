@@ -1,0 +1,124 @@
+{
+  "description": "Analysis of the components and their relationships within a protein data processing and machine learning pipeline.",
+  "components": [
+    {
+      "name": "Dataset Preparation",
+      "description": "Manages the organization of processed protein data into machine learning-ready datasets. This includes splitting data into training, validation, and test sets using clustering algorithms (e.g., MMseqs2, Foldseek, Tanimoto) to ensure diversity and prevent data leakage, and providing PyTorch-compatible data loaders for efficient model training. It also handles ligand data during splitting.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.split",
+          "reference_file": "proteinflow/split/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.split.utils",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/split/utils.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.torch",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/torch.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Data Handlers",
+      "description": "This component is responsible for the ingestion, parsing, and management of protein structural data from various file formats (e.g., PDB, pickle). It defines core data structures (PDBEntry, ProteinEntry, SAbDabEntry) and handles basic data utilities.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.data",
+          "reference_file": "proteinflow/data/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.PDBEntry",
+          "reference_file": "proteinflow/data/PDBEntry.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.ProteinEntry",
+          "reference_file": "proteinflow/data/ProteinEntry.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.SAbDabEntry",
+          "reference_file": "proteinflow/data/SAbDabEntry.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.utils",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/utils.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Data Processing",
+      "description": "This component handles the initial processing of raw protein and ligand data, preparing it for further analysis or dataset creation. This might involve cleaning, feature extraction, or other transformations.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.processing",
+          "reference_file": "proteinflow/processing/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.ligand",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/ligand.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Utility Functions",
+      "description": "This component provides a set of general-purpose helper functions that support the operations of other components. This includes functionalities like managing external software dependencies, providing constants, and general data utilities (e.g., logging).",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.extra",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/extra.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.constants",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/constants.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.logging",
+          "reference_file": "proteinflow/logging/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "consumes data from",
+      "src_name": "Dataset Preparation",
+      "dst_name": "Data Processing"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Dataset Preparation",
+      "dst_name": "Data Handlers"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Dataset Preparation",
+      "dst_name": "Utility Functions"
+    }
+  ]
+}

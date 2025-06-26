@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBoarding Analysis - django</title>
+    <title>CodeBoarding Analysis - ProteinFlow</title>
     <!-- Load dagre first, then cytoscape, then cytoscape-dagre -->
     <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
     <script src="https://unpkg.com/cytoscape@3.23.0/dist/cytoscape.min.js"></script>
@@ -92,7 +92,7 @@
     </style>
 </head>
 <body>
-    <h1>CodeBoarding Analysis - django</h1>
+    <h1>CodeBoarding Analysis - ProteinFlow</h1>
     
     <div class="badges">
         <a href="https://github.com/CodeBoarding/GeneratedOnBoardings" class="badge">
@@ -115,37 +115,25 @@
     <div id="cy"></div>
     
     <h2>Details</h2>
-    <p>The CLI Interface is fundamental because it is the user's gateway to the entire ProteinFlow system. Without it, users would not be able to initiate or control any of the data pipeline operations. It abstracts away the underlying complexity of the data processing components, providing a simplified and unified command-line experience. Its role as an orchestrator and dispatcher is critical for coordinating the execution of various data-related tasks (downloading, generating, splitting) in a structured manner. The integration with Logging and Reporting is also vital, as it provides the necessary feedback loop for users to understand the status and outcomes of their initiated processes, making the system robust and user-friendly.</p>
+    <p>This overarching component provides a comprehensive suite of tools for both quantitative assessment and qualitative visualization of protein structures and sequences. It integrates functionalities for calculating various metrics and for rendering interactive protein models, facilitating in-depth analysis and interpretation of protein data.</p>
     
     
         <div class="component">
-            <h3 id="CLI_Interface">CLI Interface</h3>
-            <p>The CLI Interface serves as the primary command-line entry point for users to interact with the ProteinFlow data pipeline. Its fundamental role is to orchestrate the entire data processing workflow by translating user commands into specific actions. It acts as a dispatcher, invoking the appropriate backend functions from other core components such as the Data Downloader, Data Generator, and Data Splitter. Furthermore, it integrates with the Logging and Reporting component to provide operational feedback, status updates, and error summaries to the user, ensuring transparency and aiding in debugging. This component is crucial because it provides the user-facing control mechanism, making the complex data pipeline accessible and manageable.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.cli` (18:20)</code></li></ul>
+            <h3 id="Evaluation_Visualization">Evaluation & Visualization <a href="./Evaluation_Visualization.html">[Expand]</a></h3>
+            <p>This overarching component provides a comprehensive suite of tools for both quantitative assessment and qualitative visualization of protein structures and sequences. It integrates functionalities for calculating various metrics and for rendering interactive protein models, facilitating in-depth analysis and interpretation of protein data.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.metrics` (1:1)</code></li><li><a href="https://github.com/CodeBoarding/ProteinFlow/blob/main/proteinflow/visualize.py#L1-L1" target="_blank" rel="noopener noreferrer"><code>`proteinflow.visualize` (1:1)</code></a></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Data_Downloader">Data Downloader</h3>
-            <p>Handles the acquisition of data.</p>
-            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
+            <h3 id="Metric_Calculators">Metric Calculators</h3>
+            <p>This sub-component focuses on the quantitative analysis of protein data. It encompasses algorithms and models for computing a diverse range of metrics, including sequence similarity scores (e.g., BLOSUM62), structural alignment scores (e.g., TM-score), and predictions from advanced deep learning models (e.g., ESMFold, IgFold). It processes protein data to derive numerical insights into their properties and relationships.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.metrics` (1:1)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Data_Generator">Data Generator</h3>
-            <p>Manages the synthesis or transformation of data.</p>
-            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
-        </div>
-        
-        <div class="component">
-            <h3 id="Data_Splitter">Data Splitter</h3>
-            <p>Manages dataset partitioning and re-consolidation.</p>
-            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
-        </div>
-        
-        <div class="component">
-            <h3 id="Logging_and_Reporting">Logging and Reporting</h3>
-            <p>Provides operational feedback, status updates, and error summaries.</p>
-            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
+            <h3 id="Visualization_Tools">Visualization Tools</h3>
+            <p>This sub-component is dedicated to the graphical representation of protein structures and their dynamic aspects. It takes processed protein data and renders them into interactive 3D models, animations, or other visual formats. This allows for intuitive exploration and qualitative understanding of complex protein geometries, interactions, and conformational changes.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><a href="https://github.com/CodeBoarding/ProteinFlow/blob/main/proteinflow/visualize.py#L1-L1" target="_blank" rel="noopener noreferrer"><code>`proteinflow.visualize` (1:1)</code></a></li></ul>
         </div>
         
     
@@ -187,74 +175,27 @@
   "elements": [
     {
       "data": {
-        "id": "CLI_Interface",
-        "label": "CLI Interface",
-        "description": "The CLI Interface serves as the primary command-line entry point for users to interact with the ProteinFlow data pipeline. Its fundamental role is to orchestrate the entire data processing workflow by translating user commands into specific actions. It acts as a dispatcher, invoking the appropriate backend functions from other core components such as the Data Downloader, Data Generator, and Data Splitter. Furthermore, it integrates with the Logging and Reporting component to provide operational feedback, status updates, and error summaries to the user, ensuring transparency and aiding in debugging. This component is crucial because it provides the user-facing control mechanism, making the complex data pipeline accessible and manageable.",
+        "id": "Evaluation_Visualization",
+        "label": "Evaluation & Visualization",
+        "description": "This overarching component provides a comprehensive suite of tools for both quantitative assessment and qualitative visualization of protein structures and sequences. It integrates functionalities for calculating various metrics and for rendering interactive protein models, facilitating in-depth analysis and interpretation of protein data.",
+        "hasLink": true,
+        "linkUrl": "./Evaluation_Visualization.html"
+      }
+    },
+    {
+      "data": {
+        "id": "Metric_Calculators",
+        "label": "Metric Calculators",
+        "description": "This sub-component focuses on the quantitative analysis of protein data. It encompasses algorithms and models for computing a diverse range of metrics, including sequence similarity scores (e.g., BLOSUM62), structural alignment scores (e.g., TM-score), and predictions from advanced deep learning models (e.g., ESMFold, IgFold). It processes protein data to derive numerical insights into their properties and relationships.",
         "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Data_Downloader",
-        "label": "Data Downloader",
-        "description": "Handles the acquisition of data.",
+        "id": "Visualization_Tools",
+        "label": "Visualization Tools",
+        "description": "This sub-component is dedicated to the graphical representation of protein structures and their dynamic aspects. It takes processed protein data and renders them into interactive 3D models, animations, or other visual formats. This allows for intuitive exploration and qualitative understanding of complex protein geometries, interactions, and conformational changes.",
         "hasLink": false
-      }
-    },
-    {
-      "data": {
-        "id": "Data_Generator",
-        "label": "Data Generator",
-        "description": "Manages the synthesis or transformation of data.",
-        "hasLink": false
-      }
-    },
-    {
-      "data": {
-        "id": "Data_Splitter",
-        "label": "Data Splitter",
-        "description": "Manages dataset partitioning and re-consolidation.",
-        "hasLink": false
-      }
-    },
-    {
-      "data": {
-        "id": "Logging_and_Reporting",
-        "label": "Logging and Reporting",
-        "description": "Provides operational feedback, status updates, and error summaries.",
-        "hasLink": false
-      }
-    },
-    {
-      "data": {
-        "id": "edge_0",
-        "source": "CLI_Interface",
-        "target": "Data_Downloader",
-        "label": "calls"
-      }
-    },
-    {
-      "data": {
-        "id": "edge_1",
-        "source": "CLI_Interface",
-        "target": "Data_Generator",
-        "label": "calls"
-      }
-    },
-    {
-      "data": {
-        "id": "edge_2",
-        "source": "CLI_Interface",
-        "target": "Data_Splitter",
-        "label": "calls"
-      }
-    },
-    {
-      "data": {
-        "id": "edge_3",
-        "source": "CLI_Interface",
-        "target": "Logging_and_Reporting",
-        "label": "uses"
       }
     }
   ]

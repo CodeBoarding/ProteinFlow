@@ -1,0 +1,69 @@
+{
+  "description": "This overarching component provides a comprehensive suite of tools for both quantitative assessment and qualitative visualization of protein structures and sequences. It integrates functionalities for calculating various metrics and for rendering interactive protein models, facilitating in-depth analysis and interpretation of protein data.",
+  "components": [
+    {
+      "name": "Evaluation & Visualization",
+      "description": "This overarching component provides a comprehensive suite of tools for both quantitative assessment and qualitative visualization of protein structures and sequences. It integrates functionalities for calculating various metrics and for rendering interactive protein models, facilitating in-depth analysis and interpretation of protein data.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.metrics",
+          "reference_file": "proteinflow/metrics/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.visualize",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/visualize.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Metric Calculators",
+      "description": "This sub-component focuses on the quantitative analysis of protein data. It encompasses algorithms and models for computing a diverse range of metrics, including sequence similarity scores (e.g., BLOSUM62), structural alignment scores (e.g., TM-score), and predictions from advanced deep learning models (e.g., ESMFold, IgFold). It processes protein data to derive numerical insights into their properties and relationships.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.metrics",
+          "reference_file": "proteinflow/metrics/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Visualization Tools",
+      "description": "This sub-component is dedicated to the graphical representation of protein structures and their dynamic aspects. It takes processed protein data and renders them into interactive 3D models, animations, or other visual formats. This allows for intuitive exploration and qualitative understanding of complex protein geometries, interactions, and conformational changes.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.visualize",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/visualize.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "retrieves data from",
+      "src_name": "Metric Calculators",
+      "dst_name": "Data Handlers"
+    },
+    {
+      "relation": "retrieves data from",
+      "src_name": "Visualization Tools",
+      "dst_name": "Data Handlers"
+    },
+    {
+      "relation": "utilizes",
+      "src_name": "Metric Calculators",
+      "dst_name": "Utility Functions"
+    },
+    {
+      "relation": "utilizes",
+      "src_name": "Visualization Tools",
+      "dst_name": "Utility Functions"
+    }
+  ]
+}

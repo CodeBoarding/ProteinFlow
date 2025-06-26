@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBoarding Analysis - django</title>
+    <title>CodeBoarding Analysis - ProteinFlow</title>
     <!-- Load dagre first, then cytoscape, then cytoscape-dagre -->
     <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
     <script src="https://unpkg.com/cytoscape@3.23.0/dist/cytoscape.min.js"></script>
@@ -92,7 +92,7 @@
     </style>
 </head>
 <body>
-    <h1>CodeBoarding Analysis - django</h1>
+    <h1>CodeBoarding Analysis - ProteinFlow</h1>
     
     <div class="badges">
         <a href="https://github.com/CodeBoarding/GeneratedOnBoardings" class="badge">
@@ -115,31 +115,67 @@
     <div id="cy"></div>
     
     <h2>Details</h2>
-    <p>The `Analysis & Visualization` component, as described, serves as an umbrella for functionalities related to protein metrics, visualization, and the management of their underlying external dependencies. Based on the provided `Analysis summary` and the related classes/methods, this component can be broken down into four fundamental sub-components, each representing a distinct and crucial aspect of the `proteinflow` library. These components are: `Data Management`, `Visualization`, `Metrics and Analysis`, and `External Dependencies and Utilities`.</p>
+    <p>The `CLI (User Interface)` component serves as the primary command-line interface for users to interact with the ProteinFlow library. It acts as the central orchestrator, interpreting user commands and initiating various core operations such as data downloading, processing, generation, splitting, and retrieving summaries. It also enables users to trigger evaluation and visualization tasks, making it the gateway for all user-driven functionalities within ProteinFlow.</p>
     
     
         <div class="component">
-            <h3 id="Data_Management">Data Management <a href="./Data_Management.html">[Expand]</a></h3>
-            <p>This component is responsible for defining and managing the core data structures that represent protein information. It handles the loading of protein entries from various formats, such as PDB files and serialized pickle files, and provides foundational data objects for the entire system. The class hierarchy shows `SAbDabEntry` inheriting from `PDBEntry`, indicating a structured approach to handling different protein data types.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`SAbDabEntry` (1:1)</code></li><li><code>`PDBEntry` (1:1)</code></li></ul>
+            <h3 id="CLI_User_Interface_">CLI (User Interface)</h3>
+            <p>The main command-line interface that parses user input and dispatches commands to the appropriate backend functionalities. It provides the user-facing entry point for all ProteinFlow operations.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><a href="https://github.com/CodeBoarding/ProteinFlow/blob/main/proteinflow/cli.py#L18-L20" target="_blank" rel="noopener noreferrer"><code>`proteinflow.cli.cli` (18:20)</code></a></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Visualization">Visualization <a href="./Visualization.html">[Expand]</a></h3>
-            <p>This component focuses on the graphical representation and animation of protein structures. It takes processed protein data and renders it for user viewing, offering functionalities like showing animations from PDB or pickle files, and merging multiple protein structures for combined display.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`visualize` (1:1)</code></li></ul>
+            <h3 id="Data_Download_Manager">Data Download Manager</h3>
+            <p>Manages the process of fetching raw protein data from external sources, ensuring the initial dataset is acquired and made available for further processing.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.download_data` (-1:-1)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Metrics_and_Analysis">Metrics and Analysis</h3>
-            <p>This component offers a comprehensive suite of computational tools for analyzing protein sequences and structures. It includes functions for calculating various biological and structural metrics (e.g., BLOSUM62 score, TM-score, language model perplexity) and integrating with external models for structure generation (e.g., ESMFold, IgFold).</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`metrics` (1:1)</code></li></ul>
+            <h3 id="Data_Generation_Engine">Data Generation Engine</h3>
+            <p>Responsible for processing raw data into structured datasets suitable for analysis or model training, often involving complex transformations and feature engineering.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.generate_data` (-1:-1)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="External_Dependencies_and_Utilities">External Dependencies and Utilities</h3>
-            <p>This component manages optional external dependencies and provides general utility functions. Its primary roles include checking for the availability of required external packages (`requires_extra`) and facilitating the acquisition of visualization views (`_get_view`). It acts as an abstraction layer, ensuring that core functionalities can gracefully handle optional integrations.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`requires_extra` (1:1)</code></li><li><code>`_get_view` (1:1)</code></li></ul>
+            <h3 id="Dataset_Splitter">Dataset Splitter</h3>
+            <p>Handles the partitioning of datasets into subsets (e.g., train, validation, test) crucial for machine learning workflows, ensuring proper data segregation for model development and evaluation.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.split_data` (-1:-1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="Dataset_Unsplitter">Dataset Unsplitter</h3>
+            <p>Reconstructs a complete dataset from its previously split components, providing flexibility in data management and allowing for operations on the full dataset.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.unsplit_data` (-1:-1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="Download_Tag_Validator">Download Tag Validator</h3>
+            <p>Verifies the integrity and correctness of tags associated with downloaded data, ensuring data quality and consistency across the dataset.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.check_download_tags` (-1:-1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="PDB_Snapshot_Validator">PDB Snapshot Validator</h3>
+            <p>Checks the status and integrity of Protein Data Bank (PDB) database snapshots, which are critical for data currency and reliability in protein structure analysis.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.check_pdb_snapshots` (-1:-1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="Error_Reporting_System">Error Reporting System</h3>
+            <p>Aggregates and summarizes error logs, providing insights into system operational issues and aiding in debugging and troubleshooting.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.logging.get_error_summary` (-1:-1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="PDB_Data_Model">PDB Data Model</h3>
+            <p>Represents the fundamental data structure for Protein Data Bank (PDB) entries, defining how protein structural data is organized and accessed within the library.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data.PDBEntry` (-1:-1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="SAbDab_Data_Model">SAbDab Data Model</h3>
+            <p>Represents the data structure for SAbDab (Structural Antibody Database) entries, inheriting specialized attributes and functionalities from the PDB Data Model to handle antibody-specific data.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data.SAbDabEntry` (-1:-1)</code></li></ul>
         </div>
         
     
@@ -181,76 +217,178 @@
   "elements": [
     {
       "data": {
-        "id": "Data_Management",
-        "label": "Data Management",
-        "description": "This component is responsible for defining and managing the core data structures that represent protein information. It handles the loading of protein entries from various formats, such as PDB files and serialized pickle files, and provides foundational data objects for the entire system. The class hierarchy shows `SAbDabEntry` inheriting from `PDBEntry`, indicating a structured approach to handling different protein data types.",
-        "hasLink": true,
-        "linkUrl": "./Data_Management.html"
-      }
-    },
-    {
-      "data": {
-        "id": "Visualization",
-        "label": "Visualization",
-        "description": "This component focuses on the graphical representation and animation of protein structures. It takes processed protein data and renders it for user viewing, offering functionalities like showing animations from PDB or pickle files, and merging multiple protein structures for combined display.",
-        "hasLink": true,
-        "linkUrl": "./Visualization.html"
-      }
-    },
-    {
-      "data": {
-        "id": "Metrics_and_Analysis",
-        "label": "Metrics and Analysis",
-        "description": "This component offers a comprehensive suite of computational tools for analyzing protein sequences and structures. It includes functions for calculating various biological and structural metrics (e.g., BLOSUM62 score, TM-score, language model perplexity) and integrating with external models for structure generation (e.g., ESMFold, IgFold).",
+        "id": "CLI_User_Interface_",
+        "label": "CLI (User Interface)",
+        "description": "The main command-line interface that parses user input and dispatches commands to the appropriate backend functionalities. It provides the user-facing entry point for all ProteinFlow operations.",
         "hasLink": false
       }
     },
     {
       "data": {
-        "id": "External_Dependencies_and_Utilities",
-        "label": "External Dependencies and Utilities",
-        "description": "This component manages optional external dependencies and provides general utility functions. Its primary roles include checking for the availability of required external packages (`requires_extra`) and facilitating the acquisition of visualization views (`_get_view`). It acts as an abstraction layer, ensuring that core functionalities can gracefully handle optional integrations.",
+        "id": "Data_Download_Manager",
+        "label": "Data Download Manager",
+        "description": "Manages the process of fetching raw protein data from external sources, ensuring the initial dataset is acquired and made available for further processing.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "Data_Generation_Engine",
+        "label": "Data Generation Engine",
+        "description": "Responsible for processing raw data into structured datasets suitable for analysis or model training, often involving complex transformations and feature engineering.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "Dataset_Splitter",
+        "label": "Dataset Splitter",
+        "description": "Handles the partitioning of datasets into subsets (e.g., train, validation, test) crucial for machine learning workflows, ensuring proper data segregation for model development and evaluation.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "Dataset_Unsplitter",
+        "label": "Dataset Unsplitter",
+        "description": "Reconstructs a complete dataset from its previously split components, providing flexibility in data management and allowing for operations on the full dataset.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "Download_Tag_Validator",
+        "label": "Download Tag Validator",
+        "description": "Verifies the integrity and correctness of tags associated with downloaded data, ensuring data quality and consistency across the dataset.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "PDB_Snapshot_Validator",
+        "label": "PDB Snapshot Validator",
+        "description": "Checks the status and integrity of Protein Data Bank (PDB) database snapshots, which are critical for data currency and reliability in protein structure analysis.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "Error_Reporting_System",
+        "label": "Error Reporting System",
+        "description": "Aggregates and summarizes error logs, providing insights into system operational issues and aiding in debugging and troubleshooting.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "PDB_Data_Model",
+        "label": "PDB Data Model",
+        "description": "Represents the fundamental data structure for Protein Data Bank (PDB) entries, defining how protein structural data is organized and accessed within the library.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "SAbDab_Data_Model",
+        "label": "SAbDab Data Model",
+        "description": "Represents the data structure for SAbDab (Structural Antibody Database) entries, inheriting specialized attributes and functionalities from the PDB Data Model to handle antibody-specific data.",
         "hasLink": false
       }
     },
     {
       "data": {
         "id": "edge_0",
-        "source": "Visualization",
-        "target": "Data_Management",
-        "label": "uses"
+        "source": "CLI_User_Interface_",
+        "target": "Data_Download_Manager",
+        "label": "initiates"
       }
     },
     {
       "data": {
         "id": "edge_1",
-        "source": "Metrics_and_Analysis",
-        "target": "Data_Management",
-        "label": "uses"
+        "source": "CLI_User_Interface_",
+        "target": "Data_Generation_Engine",
+        "label": "triggers"
       }
     },
     {
       "data": {
         "id": "edge_2",
-        "source": "Visualization",
-        "target": "External_Dependencies_and_Utilities",
-        "label": "uses"
+        "source": "CLI_User_Interface_",
+        "target": "Dataset_Splitter",
+        "label": "commands"
       }
     },
     {
       "data": {
         "id": "edge_3",
-        "source": "Metrics_and_Analysis",
-        "target": "External_Dependencies_and_Utilities",
-        "label": "uses"
+        "source": "CLI_User_Interface_",
+        "target": "Dataset_Unsplitter",
+        "label": "instructs"
       }
     },
     {
       "data": {
         "id": "edge_4",
-        "source": "Data_Management",
-        "target": "External_Dependencies_and_Utilities",
-        "label": "uses"
+        "source": "CLI_User_Interface_",
+        "target": "Download_Tag_Validator",
+        "label": "requests validation from"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_5",
+        "source": "CLI_User_Interface_",
+        "target": "PDB_Snapshot_Validator",
+        "label": "initiates checks on"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_6",
+        "source": "CLI_User_Interface_",
+        "target": "Error_Reporting_System",
+        "label": "queries"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_7",
+        "source": "Download_Tag_Validator",
+        "target": "CLI_User_Interface_",
+        "label": "provides validation to"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_8",
+        "source": "PDB_Snapshot_Validator",
+        "target": "CLI_User_Interface_",
+        "label": "provides validation to"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_9",
+        "source": "Error_Reporting_System",
+        "target": "CLI_User_Interface_",
+        "label": "provides error summaries to"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_10",
+        "source": "PDB_Data_Model",
+        "target": "SAbDab_Data_Model",
+        "label": "is base class for"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_11",
+        "source": "SAbDab_Data_Model",
+        "target": "PDB_Data_Model",
+        "label": "inherits from"
       }
     }
   ]
