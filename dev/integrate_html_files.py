@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
 Script to integrate standalone HTML files into the pdoc template structure.
-This script generates wrapper pages that main    # Remove any existing "Additional Resources" sections to avoid duplication
-    # Keep the Codeboardings section as it's managed by the html.mako template
-    sidebar = re.sub(r'<li><h3>Additional Resources</h3>.*?</li>', '', sidebar, flags=re.DOTALL)n the sidebar navigation.
+
+This script generates wrapper pages that maintain the sidebar navigation.
 """
 
 import os
@@ -92,17 +91,17 @@ def generate_pdoc_template():
     sidebar_end = content.find('</nav>', sidebar_start) + 6
     if sidebar_start == -1 or sidebar_end == -1:
         return None
-    
+
     sidebar = content[sidebar_start:sidebar_end]
-    
+
     # Find the footer
     footer_start = content.find('<footer id="footer">')
     footer_end = content.find('</html>')
     if footer_start == -1 or footer_end == -1:
         return None
-    
+
     footer = content[footer_start:footer_end]
-    
+
     return {
         'before_content': before_content,
         'sidebar': sidebar,
@@ -112,7 +111,6 @@ def generate_pdoc_template():
 
 def create_integrated_page(html_data, template_data, output_path, standalone_files, page_type="guide"):
     """Create an integrated page with pdoc template structure."""
-    
     # The integration script only handles wrapping content in pdoc structure
     # All navigation (Additional Resources, Codeboardings) is managed by html.mako template
     
@@ -157,7 +155,6 @@ def create_integrated_page(html_data, template_data, output_path, standalone_fil
     /* Custom styles from original HTML */
     {html_data['styles']}
   </style>
-
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
   <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
   <link rel="shortcut icon" type="image/x-icon" href="adaptyv_logo.png?">
@@ -182,7 +179,7 @@ def create_integrated_page(html_data, template_data, output_path, standalone_fil
 
 
 def main():
-    """Main function to integrate HTML files."""
+    """Integrate HTML files into pdoc template structure."""
     docs_dir = Path("docs")
     if not docs_dir.exists():
         print("docs directory not found")
