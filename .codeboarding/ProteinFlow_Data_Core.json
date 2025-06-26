@@ -1,0 +1,96 @@
+{
+  "description": "Component Overview: ProteinFlow Data Core",
+  "components": [
+    {
+      "name": "Protein Data Models",
+      "description": "This component defines the fundamental Python classes that represent protein structures and their associated data. It includes base classes for general protein entries and specialized classes for specific types of protein data, such as PDB entries and SAbDab entries (antibody-antigen complexes). These models encapsulate attributes like atomic coordinates, amino acid sequences, chain information, and metadata.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.data.PDBEntry",
+          "reference_file": "proteinflow/data/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.SAbDabEntry",
+          "reference_file": "proteinflow/data/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.ProteinEntry",
+          "reference_file": "proteinflow/data/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow/data/__init__.py",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow/data/utils.py",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/utils.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Data Ingestion and Utilities",
+      "description": "This component provides the functionalities for reading, parsing, and processing raw protein data from various file formats (e.g., PDB files, pickle files) into the Protein Data Models. It also includes utility functions for data validation, cleaning, and basic manipulation, ensuring that the data is correctly formatted and ready for further analysis or use by other components.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow/data/utils.py",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/utils.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow/data/torch.py",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/torch.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "provides data to",
+      "src_name": "Protein Data Models",
+      "dst_name": "Data Ingestion and Utilities"
+    },
+    {
+      "relation": "populates",
+      "src_name": "Data Ingestion and Utilities",
+      "dst_name": "Protein Data Models"
+    },
+    {
+      "relation": "provides data to",
+      "src_name": "ProteinFlow Data Core",
+      "dst_name": "Visualization Tools"
+    },
+    {
+      "relation": "provides data to",
+      "src_name": "ProteinFlow Data Core",
+      "dst_name": "Metric Calculators"
+    },
+    {
+      "relation": "uses",
+      "src_name": "ProteinFlow Data Core",
+      "dst_name": "Utility Functions"
+    },
+    {
+      "relation": "retrieves data from",
+      "src_name": "Visualization Tools",
+      "dst_name": "ProteinFlow Data Core"
+    },
+    {
+      "relation": "retrieves data from",
+      "src_name": "Metric Calculators",
+      "dst_name": "ProteinFlow Data Core"
+    }
+  ]
+}

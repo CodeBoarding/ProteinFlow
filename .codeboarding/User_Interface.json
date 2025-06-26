@@ -1,0 +1,187 @@
+{
+  "description": "The `CLI (User Interface)` component serves as the primary command-line interface for users to interact with the ProteinFlow library. It acts as the central orchestrator, interpreting user commands and initiating various core operations such as data downloading, processing, generation, splitting, and retrieving summaries. It also enables users to trigger evaluation and visualization tasks, making it the gateway for all user-driven functionalities within ProteinFlow.",
+  "components": [
+    {
+      "name": "CLI (User Interface)",
+      "description": "The main command-line interface that parses user input and dispatches commands to the appropriate backend functionalities. It provides the user-facing entry point for all ProteinFlow operations.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.cli.cli",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/cli.py",
+          "reference_start_line": 18,
+          "reference_end_line": 20
+        }
+      ]
+    },
+    {
+      "name": "Data Download Manager",
+      "description": "Manages the process of fetching raw protein data from external sources, ensuring the initial dataset is acquired and made available for further processing.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.download_data",
+          "reference_file": "proteinflow/download_data.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "Data Generation Engine",
+      "description": "Responsible for processing raw data into structured datasets suitable for analysis or model training, often involving complex transformations and feature engineering.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.generate_data",
+          "reference_file": "proteinflow/generate_data.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "Dataset Splitter",
+      "description": "Handles the partitioning of datasets into subsets (e.g., train, validation, test) crucial for machine learning workflows, ensuring proper data segregation for model development and evaluation.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.split_data",
+          "reference_file": "proteinflow/split_data.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "Dataset Unsplitter",
+      "description": "Reconstructs a complete dataset from its previously split components, providing flexibility in data management and allowing for operations on the full dataset.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.unsplit_data",
+          "reference_file": "proteinflow/unsplit_data.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "Download Tag Validator",
+      "description": "Verifies the integrity and correctness of tags associated with downloaded data, ensuring data quality and consistency across the dataset.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.check_download_tags",
+          "reference_file": "proteinflow/check_download_tags.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "PDB Snapshot Validator",
+      "description": "Checks the status and integrity of Protein Data Bank (PDB) database snapshots, which are critical for data currency and reliability in protein structure analysis.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.check_pdb_snapshots",
+          "reference_file": "proteinflow/check_pdb_snapshots.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "Error Reporting System",
+      "description": "Aggregates and summarizes error logs, providing insights into system operational issues and aiding in debugging and troubleshooting.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.logging.get_error_summary",
+          "reference_file": "proteinflow/logging.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "PDB Data Model",
+      "description": "Represents the fundamental data structure for Protein Data Bank (PDB) entries, defining how protein structural data is organized and accessed within the library.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.data.PDBEntry",
+          "reference_file": "proteinflow/data.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    },
+    {
+      "name": "SAbDab Data Model",
+      "description": "Represents the data structure for SAbDab (Structural Antibody Database) entries, inheriting specialized attributes and functionalities from the PDB Data Model to handle antibody-specific data.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.data.SAbDabEntry",
+          "reference_file": "proteinflow/data.py",
+          "reference_start_line": -1,
+          "reference_end_line": -1
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "initiates",
+      "src_name": "CLI (User Interface)",
+      "dst_name": "Data Download Manager"
+    },
+    {
+      "relation": "triggers",
+      "src_name": "CLI (User Interface)",
+      "dst_name": "Data Generation Engine"
+    },
+    {
+      "relation": "commands",
+      "src_name": "CLI (User Interface)",
+      "dst_name": "Dataset Splitter"
+    },
+    {
+      "relation": "instructs",
+      "src_name": "CLI (User Interface)",
+      "dst_name": "Dataset Unsplitter"
+    },
+    {
+      "relation": "requests validation from",
+      "src_name": "CLI (User Interface)",
+      "dst_name": "Download Tag Validator"
+    },
+    {
+      "relation": "initiates checks on",
+      "src_name": "CLI (User Interface)",
+      "dst_name": "PDB Snapshot Validator"
+    },
+    {
+      "relation": "queries",
+      "src_name": "CLI (User Interface)",
+      "dst_name": "Error Reporting System"
+    },
+    {
+      "relation": "provides validation to",
+      "src_name": "Download Tag Validator",
+      "dst_name": "CLI (User Interface)"
+    },
+    {
+      "relation": "provides validation to",
+      "src_name": "PDB Snapshot Validator",
+      "dst_name": "CLI (User Interface)"
+    },
+    {
+      "relation": "provides error summaries to",
+      "src_name": "Error Reporting System",
+      "dst_name": "CLI (User Interface)"
+    },
+    {
+      "relation": "is base class for",
+      "src_name": "PDB Data Model",
+      "dst_name": "SAbDab Data Model"
+    },
+    {
+      "relation": "inherits from",
+      "src_name": "SAbDab Data Model",
+      "dst_name": "PDB Data Model"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "description": "Final high-level architecture analysis for ProteinFlow",
+  "components": [
+    {
+      "name": "ProteinFlow Data Core",
+      "description": "This foundational component defines the core data structures for representing protein and PDB entries, including their sequences, coordinates, and associated metadata. It serves as the central data representation for the entire library, ensuring consistent data handling across all modules.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.data.__init__",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.utils",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/utils.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Data Management",
+      "description": "Handles the entire lifecycle of raw protein data, from downloading and acquisition from external databases (PDB, SAbDab) to comprehensive processing, filtering, error handling, redundancy removal, and specialized ligand processing. It ensures data quality and readiness for subsequent steps.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.download.__init__",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/download/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.download.boto",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/download/boto.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.processing.__init__",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/processing/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.ligand",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/ligand.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Dataset Preparation",
+      "description": "Manages the organization of processed protein data into machine learning-ready datasets. This includes splitting data into training, validation, and test sets using clustering algorithms (e.g., MMseqs2, Foldseek, Tanimoto) to ensure diversity and prevent data leakage, and providing PyTorch-compatible data loaders for efficient model training.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.split.__init__",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/split/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.split.utils",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/split/utils.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.data.torch",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/data/torch.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Evaluation & Visualization",
+      "description": "Provides tools for evaluating protein structures and sequences using various metrics (e.g., BLOSUM62, TM-score, ESMFold) and for visualizing protein structures and animations from PDB files or ProteinEntry objects. It supports analysis and interpretation of protein data.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.metrics.__init__",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/metrics/__init__.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "proteinflow.visualize",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/visualize.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "User Interface",
+      "description": "Serves as the primary command-line interface for users to interact with the ProteinFlow library. It enables users to trigger core operations such as data downloading, processing, generation, splitting, and to retrieve summaries and initiate evaluation/visualization tasks.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "proteinflow.cli",
+          "reference_file": "/mnt/e/StartUp/ProteinFlow/proteinflow/cli.py",
+          "reference_start_line": 18,
+          "reference_end_line": 20
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "produces",
+      "src_name": "Data Management",
+      "dst_name": "ProteinFlow Data Core"
+    },
+    {
+      "relation": "consumes",
+      "src_name": "Dataset Preparation",
+      "dst_name": "ProteinFlow Data Core"
+    },
+    {
+      "relation": "initiates",
+      "src_name": "User Interface",
+      "dst_name": "Data Management"
+    },
+    {
+      "relation": "outputs",
+      "src_name": "Data Management",
+      "dst_name": "ProteinFlow Data Core"
+    },
+    {
+      "relation": "initiates",
+      "src_name": "User Interface",
+      "dst_name": "Dataset Preparation"
+    },
+    {
+      "relation": "processes",
+      "src_name": "Dataset Preparation",
+      "dst_name": "ProteinFlow Data Core"
+    },
+    {
+      "relation": "analyzes",
+      "src_name": "Evaluation & Visualization",
+      "dst_name": "ProteinFlow Data Core"
+    },
+    {
+      "relation": "accesses",
+      "src_name": "User Interface",
+      "dst_name": "Evaluation & Visualization"
+    },
+    {
+      "relation": "controls",
+      "src_name": "User Interface",
+      "dst_name": "Data Management"
+    },
+    {
+      "relation": "controls",
+      "src_name": "User Interface",
+      "dst_name": "Dataset Preparation"
+    }
+  ]
+}
