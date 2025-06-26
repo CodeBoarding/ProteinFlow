@@ -115,31 +115,37 @@
     <div id="cy"></div>
     
     <h2>Details</h2>
-    <p>The `ProteinFlow` project is structured around a streamlined pipeline for acquiring, processing, organizing, and preparing protein data for machine learning tasks, complemented by analysis and visualization capabilities. The architecture is designed to facilitate efficient handling of large biological datasets.</p>
+    <p>This subsystem focuses on organizing and partitioning processed protein data into distinct train, validation, and test sets, often employing clustering techniques to ensure diverse and representative splits. It also provides PyTorch-compatible `Dataset` and `DataLoader` classes for efficient batching and preparation of data, making it ready for machine learning model training and evaluation.</p>
     
     
         <div class="component">
-            <h3 id="User_Interface_CLI_">User Interface (CLI) <a href="./User_Interface_CLI_.html">[Expand]</a></h3>
-            <p>The primary command-line interface that serves as the entry point for users to initiate and control the entire data pipeline. It orchestrates the execution of data acquisition, processing, and organization workflows.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.cli` (18:20)</code></li></ul>
+            <h3 id="Data_Splitting_Module">Data Splitting Module</h3>
+            <p>This module orchestrates the division of the protein dataset into training, validation, and test sets. It employs advanced strategies, including sequence and structural similarity-based clustering (e.g., using MMseqs2 and Foldseek), to ensure robust data separation and prevent data leakage, crucial for unbiased model evaluation.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.split` (0:0)</code></li><li><code>`proteinflow.split.utils` (0:0)</code></li><li><code>`proteinflow.split.split_data` (0:0)</code></li><li><code>`proteinflow.split._build_dataset_partition` (0:0)</code></li><li><code>`proteinflow.split._split_dataset_with_graphs` (0:0)</code></li><li><code>`proteinflow.split._get_split_dictionaries` (0:0)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Core_Data_Management">Core Data Management <a href="./Core_Data_Management.html">[Expand]</a></h3>
-            <p>This foundational component is responsible for the acquisition of raw protein data (PDB and SAbDab files), defining the core data structures for representing proteins and associated ligands, and performing the initial processing steps. This includes filtering, cleaning, and converting raw data into standardized `ProteinEntry` objects, handling quality checks, and managing ligand-specific details.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data` (1:1)</code></li><li><code>`proteinflow.data.PDBEntry` (1:1)</code></li><li><code>`proteinflow.data.SAbDabEntry` (1:1)</code></li><li><code>`proteinflow.download` (1:1)</code></li><li><code>`proteinflow.processing` (1:1)</code></li><li><code>`proteinflow.ligand` (1:1)</code></li></ul>
+            <h3 id="PyTorch_Data_Module">PyTorch Data Module</h3>
+            <p>This module provides the necessary PyTorch-compatible `Dataset` and `DataLoader` classes, facilitating the seamless integration of processed protein data with deep learning models. It handles efficient data loading, batching, and preparation for training and evaluation.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data.torch` (0:0)</code></li><li><code>`proteinflow.data.torch.ProteinDataset` (242:1131)</code></li><li><code>`proteinflow.data.torch.ProteinLoader` (67:239)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Data_Preparation_for_ML">Data Preparation for ML <a href="./Data_Preparation_for_ML.html">[Expand]</a></h3>
-            <p>Focuses on organizing and partitioning the processed protein data into distinct train, validation, and test sets, often employing clustering techniques to ensure diverse and representative splits. It also provides PyTorch-compatible `Dataset` and `DataLoader` classes for efficient batching and preparation of data, making it ready for machine learning model training and evaluation.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.split` (1:1)</code></li><li><code>`proteinflow.data.torch` (1:1)</code></li></ul>
+            <h3 id="Protein_Data_Structure">Protein Data Structure</h3>
+            <p>This fundamental component defines the structure for encapsulating all relevant information for a single protein entry, including sequence, coordinates, chain IDs, and associated ligand data. It provides methods for parsing, validating, and extracting specific features, serving as the core data representation throughout the data preparation pipeline. `proteinflow.data.SAbDabEntry` inherits from `proteinflow.data.PDBEntry`, extending the base protein data structure for antibody-specific entries.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data` (0:0)</code></li><li><code>`proteinflow.data.utils` (0:0)</code></li><li><code>`proteinflow.data.PDBEntry` (0:0)</code></li><li><code>`proteinflow.data.SAbDabEntry` (0:0)</code></li><li><code>`proteinflow.data.utils.from_pickle` (0:0)</code></li><li><code>`proteinflow.data.utils.to_pdb` (0:0)</code></li><li><code>`proteinflow.data.utils.get_chains` (0:0)</code></li><li><code>`proteinflow.data.utils.get_sequence` (0:0)</code></li><li><code>`proteinflow.data.utils.get_coordinates` (0:0)</code></li><li><code>`proteinflow.data.utils.retrieve_ligands_from_pickle` (0:0)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Analysis_Visualization">Analysis & Visualization <a href="./Analysis_Visualization.html">[Expand]</a></h3>
-            <p>Offers a comprehensive suite of tools for calculating various protein-related metrics (e.g., sequence similarity, language model perplexity) and for visualizing protein structures and animations. This component also manages optional external dependencies required for its advanced functionalities.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.metrics` (1:1)</code></li><li><code>`proteinflow.visualize` (1:1)</code></li><li><code>`proteinflow.extra` (1:1)</code></li></ul>
+            <h3 id="Ligand_Processing_Module">Ligand Processing Module</h3>
+            <p>This module specializes in handling ligand-related data within protein entries. It includes functionalities for loading ligand information (e.g., SMILES strings) and performing chemical similarity-based clustering, which can be integrated into data splitting strategies.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.ligand` (0:0)</code></li><li><code>`proteinflow.ligand._load_smiles` (653:678)</code></li><li><code>`proteinflow.ligand._merge_chains_ligands` (694:737)</code></li><li><code>`proteinflow.ligand._run_tanimoto_clustering` (983:1001)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="Splitting_Utilities">Splitting Utilities</h3>
+            <p>This module provides a suite of helper functions that support the intricate logic within the `Data Splitting Module`. These utilities are essential for tasks such as finding correspondences between protein chains, loading PDB files, merging chains, and managing biounit information during the data splitting process.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.split.utils` (0:0)</code></li><li><code>`proteinflow.split.utils._find_correspondences` (139:149)</code></li><li><code>`proteinflow.split.utils._load_pdbs` (72:99)</code></li><li><code>`proteinflow.split.utils._merge_chains` (25:69)</code></li><li><code>`proteinflow.split.utils._biounits_in_clusters_dict` (152:164)</code></li></ul>
         </div>
         
     
@@ -181,70 +187,90 @@
   "elements": [
     {
       "data": {
-        "id": "User_Interface_CLI_",
-        "label": "User Interface (CLI)",
-        "description": "The primary command-line interface that serves as the entry point for users to initiate and control the entire data pipeline. It orchestrates the execution of data acquisition, processing, and organization workflows.",
-        "hasLink": true,
-        "linkUrl": "./User_Interface_CLI_.html"
+        "id": "Data_Splitting_Module",
+        "label": "Data Splitting Module",
+        "description": "This module orchestrates the division of the protein dataset into training, validation, and test sets. It employs advanced strategies, including sequence and structural similarity-based clustering (e.g., using MMseqs2 and Foldseek), to ensure robust data separation and prevent data leakage, crucial for unbiased model evaluation.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Core_Data_Management",
-        "label": "Core Data Management",
-        "description": "This foundational component is responsible for the acquisition of raw protein data (PDB and SAbDab files), defining the core data structures for representing proteins and associated ligands, and performing the initial processing steps. This includes filtering, cleaning, and converting raw data into standardized `ProteinEntry` objects, handling quality checks, and managing ligand-specific details.",
-        "hasLink": true,
-        "linkUrl": "./Core_Data_Management.html"
+        "id": "PyTorch_Data_Module",
+        "label": "PyTorch Data Module",
+        "description": "This module provides the necessary PyTorch-compatible `Dataset` and `DataLoader` classes, facilitating the seamless integration of processed protein data with deep learning models. It handles efficient data loading, batching, and preparation for training and evaluation.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Data_Preparation_for_ML",
-        "label": "Data Preparation for ML",
-        "description": "Focuses on organizing and partitioning the processed protein data into distinct train, validation, and test sets, often employing clustering techniques to ensure diverse and representative splits. It also provides PyTorch-compatible `Dataset` and `DataLoader` classes for efficient batching and preparation of data, making it ready for machine learning model training and evaluation.",
-        "hasLink": true,
-        "linkUrl": "./Data_Preparation_for_ML.html"
+        "id": "Protein_Data_Structure",
+        "label": "Protein Data Structure",
+        "description": "This fundamental component defines the structure for encapsulating all relevant information for a single protein entry, including sequence, coordinates, chain IDs, and associated ligand data. It provides methods for parsing, validating, and extracting specific features, serving as the core data representation throughout the data preparation pipeline. `proteinflow.data.SAbDabEntry` inherits from `proteinflow.data.PDBEntry`, extending the base protein data structure for antibody-specific entries.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Analysis_Visualization",
-        "label": "Analysis & Visualization",
-        "description": "Offers a comprehensive suite of tools for calculating various protein-related metrics (e.g., sequence similarity, language model perplexity) and for visualizing protein structures and animations. This component also manages optional external dependencies required for its advanced functionalities.",
-        "hasLink": true,
-        "linkUrl": "./Analysis_Visualization.html"
+        "id": "Ligand_Processing_Module",
+        "label": "Ligand Processing Module",
+        "description": "This module specializes in handling ligand-related data within protein entries. It includes functionalities for loading ligand information (e.g., SMILES strings) and performing chemical similarity-based clustering, which can be integrated into data splitting strategies.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "Splitting_Utilities",
+        "label": "Splitting Utilities",
+        "description": "This module provides a suite of helper functions that support the intricate logic within the `Data Splitting Module`. These utilities are essential for tasks such as finding correspondences between protein chains, loading PDB files, merging chains, and managing biounit information during the data splitting process.",
+        "hasLink": false
       }
     },
     {
       "data": {
         "id": "edge_0",
-        "source": "User_Interface_CLI_",
-        "target": "Core_Data_Management",
-        "label": "Initiates operations in"
+        "source": "Data_Splitting_Module",
+        "target": "Protein_Data_Structure",
+        "label": "uses"
       }
     },
     {
       "data": {
         "id": "edge_1",
-        "source": "User_Interface_CLI_",
-        "target": "Data_Preparation_for_ML",
-        "label": "Initiates operations in"
+        "source": "Data_Splitting_Module",
+        "target": "Ligand_Processing_Module",
+        "label": "uses"
       }
     },
     {
       "data": {
         "id": "edge_2",
-        "source": "Core_Data_Management",
-        "target": "Data_Preparation_for_ML",
-        "label": "Provides processed data to"
+        "source": "Data_Splitting_Module",
+        "target": "Splitting_Utilities",
+        "label": "uses"
       }
     },
     {
       "data": {
         "id": "edge_3",
-        "source": "Core_Data_Management",
-        "target": "Analysis_Visualization",
-        "label": "Provides data to"
+        "source": "PyTorch_Data_Module",
+        "target": "Protein_Data_Structure",
+        "label": "uses"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_4",
+        "source": "Ligand_Processing_Module",
+        "target": "Protein_Data_Structure",
+        "label": "uses"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_5",
+        "source": "Splitting_Utilities",
+        "target": "Protein_Data_Structure",
+        "label": "uses"
       }
     }
   ]

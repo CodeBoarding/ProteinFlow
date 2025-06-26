@@ -115,31 +115,37 @@
     <div id="cy"></div>
     
     <h2>Details</h2>
-    <p>The `ProteinFlow` project is structured around a streamlined pipeline for acquiring, processing, organizing, and preparing protein data for machine learning tasks, complemented by analysis and visualization capabilities. The architecture is designed to facilitate efficient handling of large biological datasets.</p>
+    <p>The CLI Interface is fundamental because it is the user's gateway to the entire ProteinFlow system. Without it, users would not be able to initiate or control any of the data pipeline operations. It abstracts away the underlying complexity of the data processing components, providing a simplified and unified command-line experience. Its role as an orchestrator and dispatcher is critical for coordinating the execution of various data-related tasks (downloading, generating, splitting) in a structured manner. The integration with Logging and Reporting is also vital, as it provides the necessary feedback loop for users to understand the status and outcomes of their initiated processes, making the system robust and user-friendly.</p>
     
     
         <div class="component">
-            <h3 id="User_Interface_CLI_">User Interface (CLI) <a href="./User_Interface_CLI_.html">[Expand]</a></h3>
-            <p>The primary command-line interface that serves as the entry point for users to initiate and control the entire data pipeline. It orchestrates the execution of data acquisition, processing, and organization workflows.</p>
+            <h3 id="CLI_Interface">CLI Interface</h3>
+            <p>The CLI Interface serves as the primary command-line entry point for users to interact with the ProteinFlow data pipeline. Its fundamental role is to orchestrate the entire data processing workflow by translating user commands into specific actions. It acts as a dispatcher, invoking the appropriate backend functions from other core components such as the Data Downloader, Data Generator, and Data Splitter. Furthermore, it integrates with the Logging and Reporting component to provide operational feedback, status updates, and error summaries to the user, ensuring transparency and aiding in debugging. This component is crucial because it provides the user-facing control mechanism, making the complex data pipeline accessible and manageable.</p>
             <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.cli` (18:20)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Core_Data_Management">Core Data Management <a href="./Core_Data_Management.html">[Expand]</a></h3>
-            <p>This foundational component is responsible for the acquisition of raw protein data (PDB and SAbDab files), defining the core data structures for representing proteins and associated ligands, and performing the initial processing steps. This includes filtering, cleaning, and converting raw data into standardized `ProteinEntry` objects, handling quality checks, and managing ligand-specific details.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data` (1:1)</code></li><li><code>`proteinflow.data.PDBEntry` (1:1)</code></li><li><code>`proteinflow.data.SAbDabEntry` (1:1)</code></li><li><code>`proteinflow.download` (1:1)</code></li><li><code>`proteinflow.processing` (1:1)</code></li><li><code>`proteinflow.ligand` (1:1)</code></li></ul>
+            <h3 id="Data_Downloader">Data Downloader</h3>
+            <p>Handles the acquisition of data.</p>
+            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
         </div>
         
         <div class="component">
-            <h3 id="Data_Preparation_for_ML">Data Preparation for ML <a href="./Data_Preparation_for_ML.html">[Expand]</a></h3>
-            <p>Focuses on organizing and partitioning the processed protein data into distinct train, validation, and test sets, often employing clustering techniques to ensure diverse and representative splits. It also provides PyTorch-compatible `Dataset` and `DataLoader` classes for efficient batching and preparation of data, making it ready for machine learning model training and evaluation.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.split` (1:1)</code></li><li><code>`proteinflow.data.torch` (1:1)</code></li></ul>
+            <h3 id="Data_Generator">Data Generator</h3>
+            <p>Manages the synthesis or transformation of data.</p>
+            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
         </div>
         
         <div class="component">
-            <h3 id="Analysis_Visualization">Analysis & Visualization <a href="./Analysis_Visualization.html">[Expand]</a></h3>
-            <p>Offers a comprehensive suite of tools for calculating various protein-related metrics (e.g., sequence similarity, language model perplexity) and for visualizing protein structures and animations. This component also manages optional external dependencies required for its advanced functionalities.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.metrics` (1:1)</code></li><li><code>`proteinflow.visualize` (1:1)</code></li><li><code>`proteinflow.extra` (1:1)</code></li></ul>
+            <h3 id="Data_Splitter">Data Splitter</h3>
+            <p>Manages dataset partitioning and re-consolidation.</p>
+            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
+        </div>
+        
+        <div class="component">
+            <h3 id="Logging_and_Reporting">Logging and Reporting</h3>
+            <p>Provides operational feedback, status updates, and error summaries.</p>
+            <h4>Related Classes/Methods:</h4><p><em>None</em></p>
         </div>
         
     
@@ -181,70 +187,74 @@
   "elements": [
     {
       "data": {
-        "id": "User_Interface_CLI_",
-        "label": "User Interface (CLI)",
-        "description": "The primary command-line interface that serves as the entry point for users to initiate and control the entire data pipeline. It orchestrates the execution of data acquisition, processing, and organization workflows.",
-        "hasLink": true,
-        "linkUrl": "./User_Interface_CLI_.html"
+        "id": "CLI_Interface",
+        "label": "CLI Interface",
+        "description": "The CLI Interface serves as the primary command-line entry point for users to interact with the ProteinFlow data pipeline. Its fundamental role is to orchestrate the entire data processing workflow by translating user commands into specific actions. It acts as a dispatcher, invoking the appropriate backend functions from other core components such as the Data Downloader, Data Generator, and Data Splitter. Furthermore, it integrates with the Logging and Reporting component to provide operational feedback, status updates, and error summaries to the user, ensuring transparency and aiding in debugging. This component is crucial because it provides the user-facing control mechanism, making the complex data pipeline accessible and manageable.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Core_Data_Management",
-        "label": "Core Data Management",
-        "description": "This foundational component is responsible for the acquisition of raw protein data (PDB and SAbDab files), defining the core data structures for representing proteins and associated ligands, and performing the initial processing steps. This includes filtering, cleaning, and converting raw data into standardized `ProteinEntry` objects, handling quality checks, and managing ligand-specific details.",
-        "hasLink": true,
-        "linkUrl": "./Core_Data_Management.html"
+        "id": "Data_Downloader",
+        "label": "Data Downloader",
+        "description": "Handles the acquisition of data.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Data_Preparation_for_ML",
-        "label": "Data Preparation for ML",
-        "description": "Focuses on organizing and partitioning the processed protein data into distinct train, validation, and test sets, often employing clustering techniques to ensure diverse and representative splits. It also provides PyTorch-compatible `Dataset` and `DataLoader` classes for efficient batching and preparation of data, making it ready for machine learning model training and evaluation.",
-        "hasLink": true,
-        "linkUrl": "./Data_Preparation_for_ML.html"
+        "id": "Data_Generator",
+        "label": "Data Generator",
+        "description": "Manages the synthesis or transformation of data.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Analysis_Visualization",
-        "label": "Analysis & Visualization",
-        "description": "Offers a comprehensive suite of tools for calculating various protein-related metrics (e.g., sequence similarity, language model perplexity) and for visualizing protein structures and animations. This component also manages optional external dependencies required for its advanced functionalities.",
-        "hasLink": true,
-        "linkUrl": "./Analysis_Visualization.html"
+        "id": "Data_Splitter",
+        "label": "Data Splitter",
+        "description": "Manages dataset partitioning and re-consolidation.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "Logging_and_Reporting",
+        "label": "Logging and Reporting",
+        "description": "Provides operational feedback, status updates, and error summaries.",
+        "hasLink": false
       }
     },
     {
       "data": {
         "id": "edge_0",
-        "source": "User_Interface_CLI_",
-        "target": "Core_Data_Management",
-        "label": "Initiates operations in"
+        "source": "CLI_Interface",
+        "target": "Data_Downloader",
+        "label": "calls"
       }
     },
     {
       "data": {
         "id": "edge_1",
-        "source": "User_Interface_CLI_",
-        "target": "Data_Preparation_for_ML",
-        "label": "Initiates operations in"
+        "source": "CLI_Interface",
+        "target": "Data_Generator",
+        "label": "calls"
       }
     },
     {
       "data": {
         "id": "edge_2",
-        "source": "Core_Data_Management",
-        "target": "Data_Preparation_for_ML",
-        "label": "Provides processed data to"
+        "source": "CLI_Interface",
+        "target": "Data_Splitter",
+        "label": "calls"
       }
     },
     {
       "data": {
         "id": "edge_3",
-        "source": "Core_Data_Management",
-        "target": "Analysis_Visualization",
-        "label": "Provides data to"
+        "source": "CLI_Interface",
+        "target": "Logging_and_Reporting",
+        "label": "uses"
       }
     }
   ]

@@ -115,31 +115,43 @@
     <div id="cy"></div>
     
     <h2>Details</h2>
-    <p>The `ProteinFlow` project is structured around a streamlined pipeline for acquiring, processing, organizing, and preparing protein data for machine learning tasks, complemented by analysis and visualization capabilities. The architecture is designed to facilitate efficient handling of large biological datasets.</p>
+    <p>The `Core Data Management` component is fundamental to `proteinflow` as it establishes the initial pipeline for acquiring, structuring, and preparing raw protein data. It ensures that all subsequent operations, such as feature extraction and model training, have access to high-quality, standardized input. Without these foundational steps, the project would lack the necessary data integrity and accessibility to function effectively.</p>
     
     
         <div class="component">
-            <h3 id="User_Interface_CLI_">User Interface (CLI) <a href="./User_Interface_CLI_.html">[Expand]</a></h3>
-            <p>The primary command-line interface that serves as the entry point for users to initiate and control the entire data pipeline. It orchestrates the execution of data acquisition, processing, and organization workflows.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.cli` (18:20)</code></li></ul>
+            <h3 id="proteinflow_download">proteinflow.download</h3>
+            <p>This component is responsible for fetching raw protein data (PDB and SAbDab files) from external databases and managing their local storage. It acts as the primary entry point for data acquisition.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.download` (1:1)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Core_Data_Management">Core Data Management <a href="./Core_Data_Management.html">[Expand]</a></h3>
-            <p>This foundational component is responsible for the acquisition of raw protein data (PDB and SAbDab files), defining the core data structures for representing proteins and associated ligands, and performing the initial processing steps. This includes filtering, cleaning, and converting raw data into standardized `ProteinEntry` objects, handling quality checks, and managing ligand-specific details.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data` (1:1)</code></li><li><code>`proteinflow.data.PDBEntry` (1:1)</code></li><li><code>`proteinflow.data.SAbDabEntry` (1:1)</code></li><li><code>`proteinflow.download` (1:1)</code></li><li><code>`proteinflow.processing` (1:1)</code></li><li><code>`proteinflow.ligand` (1:1)</code></li></ul>
+            <h3 id="proteinflow_data_PDBEntry">proteinflow.data.PDBEntry</h3>
+            <p>This class serves as the foundational data structure for parsing and representing information from standard PDB or mmCIF files. It extracts atomic coordinates, sequences, and basic structural properties, including initial ligand information.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data.PDBEntry` (1:1)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Data_Preparation_for_ML">Data Preparation for ML <a href="./Data_Preparation_for_ML.html">[Expand]</a></h3>
-            <p>Focuses on organizing and partitioning the processed protein data into distinct train, validation, and test sets, often employing clustering techniques to ensure diverse and representative splits. It also provides PyTorch-compatible `Dataset` and `DataLoader` classes for efficient batching and preparation of data, making it ready for machine learning model training and evaluation.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.split` (1:1)</code></li><li><code>`proteinflow.data.torch` (1:1)</code></li></ul>
+            <h3 id="proteinflow_data_SAbDabEntry">proteinflow.data.SAbDabEntry</h3>
+            <p>Extending `PDBEntry`, this specialized class handles antibody structures from the SAbDab database. It incorporates specific logic for identifying Complementarity Determining Regions (CDRs) and managing antibody chain types, building upon the base PDB structure.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data.SAbDabEntry` (1:1)</code></li></ul>
         </div>
         
         <div class="component">
-            <h3 id="Analysis_Visualization">Analysis & Visualization <a href="./Analysis_Visualization.html">[Expand]</a></h3>
-            <p>Offers a comprehensive suite of tools for calculating various protein-related metrics (e.g., sequence similarity, language model perplexity) and for visualizing protein structures and animations. This component also manages optional external dependencies required for its advanced functionalities.</p>
-            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.metrics` (1:1)</code></li><li><code>`proteinflow.visualize` (1:1)</code></li><li><code>`proteinflow.extra` (1:1)</code></li></ul>
+            <h3 id="proteinflow_data_ProteinEntry">proteinflow.data.ProteinEntry</h3>
+            <p>This is the central, standardized data model that aggregates and processes information from `PDBEntry` and `SAbDabEntry`. It represents the cleaned, filtered, and unified protein data, ready for feature extraction and downstream analysis.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.data.ProteinEntry` (1:1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="proteinflow_ligand">proteinflow.ligand</h3>
+            <p>This module is dedicated to the identification, parsing, and detailed processing of ligand molecules associated with protein structures. It handles tasks such as extracting ligand data from PDB files and managing their chemical properties.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.ligand` (1:1)</code></li></ul>
+        </div>
+        
+        <div class="component">
+            <h3 id="proteinflow_processing">proteinflow.processing</h3>
+            <p>This component orchestrates the overall data processing pipeline. It manages the filtering, cleaning, and conversion of raw protein entries into standardized `ProteinEntry` objects, ensuring data quality and preparing it for further use.</p>
+            <h4>Related Classes/Methods:</h4><ul class="references"><li><code>`proteinflow.processing` (1:1)</code></li></ul>
         </div>
         
     
@@ -181,70 +193,122 @@
   "elements": [
     {
       "data": {
-        "id": "User_Interface_CLI_",
-        "label": "User Interface (CLI)",
-        "description": "The primary command-line interface that serves as the entry point for users to initiate and control the entire data pipeline. It orchestrates the execution of data acquisition, processing, and organization workflows.",
-        "hasLink": true,
-        "linkUrl": "./User_Interface_CLI_.html"
+        "id": "proteinflow_download",
+        "label": "proteinflow.download",
+        "description": "This component is responsible for fetching raw protein data (PDB and SAbDab files) from external databases and managing their local storage. It acts as the primary entry point for data acquisition.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Core_Data_Management",
-        "label": "Core Data Management",
-        "description": "This foundational component is responsible for the acquisition of raw protein data (PDB and SAbDab files), defining the core data structures for representing proteins and associated ligands, and performing the initial processing steps. This includes filtering, cleaning, and converting raw data into standardized `ProteinEntry` objects, handling quality checks, and managing ligand-specific details.",
-        "hasLink": true,
-        "linkUrl": "./Core_Data_Management.html"
+        "id": "proteinflow_data_PDBEntry",
+        "label": "proteinflow.data.PDBEntry",
+        "description": "This class serves as the foundational data structure for parsing and representing information from standard PDB or mmCIF files. It extracts atomic coordinates, sequences, and basic structural properties, including initial ligand information.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Data_Preparation_for_ML",
-        "label": "Data Preparation for ML",
-        "description": "Focuses on organizing and partitioning the processed protein data into distinct train, validation, and test sets, often employing clustering techniques to ensure diverse and representative splits. It also provides PyTorch-compatible `Dataset` and `DataLoader` classes for efficient batching and preparation of data, making it ready for machine learning model training and evaluation.",
-        "hasLink": true,
-        "linkUrl": "./Data_Preparation_for_ML.html"
+        "id": "proteinflow_data_SAbDabEntry",
+        "label": "proteinflow.data.SAbDabEntry",
+        "description": "Extending `PDBEntry`, this specialized class handles antibody structures from the SAbDab database. It incorporates specific logic for identifying Complementarity Determining Regions (CDRs) and managing antibody chain types, building upon the base PDB structure.",
+        "hasLink": false
       }
     },
     {
       "data": {
-        "id": "Analysis_Visualization",
-        "label": "Analysis & Visualization",
-        "description": "Offers a comprehensive suite of tools for calculating various protein-related metrics (e.g., sequence similarity, language model perplexity) and for visualizing protein structures and animations. This component also manages optional external dependencies required for its advanced functionalities.",
-        "hasLink": true,
-        "linkUrl": "./Analysis_Visualization.html"
+        "id": "proteinflow_data_ProteinEntry",
+        "label": "proteinflow.data.ProteinEntry",
+        "description": "This is the central, standardized data model that aggregates and processes information from `PDBEntry` and `SAbDabEntry`. It represents the cleaned, filtered, and unified protein data, ready for feature extraction and downstream analysis.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "proteinflow_ligand",
+        "label": "proteinflow.ligand",
+        "description": "This module is dedicated to the identification, parsing, and detailed processing of ligand molecules associated with protein structures. It handles tasks such as extracting ligand data from PDB files and managing their chemical properties.",
+        "hasLink": false
+      }
+    },
+    {
+      "data": {
+        "id": "proteinflow_processing",
+        "label": "proteinflow.processing",
+        "description": "This component orchestrates the overall data processing pipeline. It manages the filtering, cleaning, and conversion of raw protein entries into standardized `ProteinEntry` objects, ensuring data quality and preparing it for further use.",
+        "hasLink": false
       }
     },
     {
       "data": {
         "id": "edge_0",
-        "source": "User_Interface_CLI_",
-        "target": "Core_Data_Management",
-        "label": "Initiates operations in"
+        "source": "proteinflow_download",
+        "target": "proteinflow_processing",
+        "label": "provides raw files and initiates acquisition"
       }
     },
     {
       "data": {
         "id": "edge_1",
-        "source": "User_Interface_CLI_",
-        "target": "Data_Preparation_for_ML",
-        "label": "Initiates operations in"
+        "source": "proteinflow_processing",
+        "target": "proteinflow_data_PDBEntry",
+        "label": "creates and processes"
       }
     },
     {
       "data": {
         "id": "edge_2",
-        "source": "Core_Data_Management",
-        "target": "Data_Preparation_for_ML",
-        "label": "Provides processed data to"
+        "source": "proteinflow_processing",
+        "target": "proteinflow_data_SAbDabEntry",
+        "label": "creates and processes"
       }
     },
     {
       "data": {
         "id": "edge_3",
-        "source": "Core_Data_Management",
-        "target": "Analysis_Visualization",
-        "label": "Provides data to"
+        "source": "proteinflow_data_PDBEntry",
+        "target": "proteinflow_ligand",
+        "label": "utilizes for ligand extraction"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_4",
+        "source": "proteinflow_ligand",
+        "target": "proteinflow_data_PDBEntry",
+        "label": "processes ligand data for"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_5",
+        "source": "proteinflow_data_SAbDabEntry",
+        "target": "proteinflow_data_PDBEntry",
+        "label": "inherits from"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_6",
+        "source": "proteinflow_data_PDBEntry",
+        "target": "proteinflow_data_ProteinEntry",
+        "label": "provides raw data for"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_7",
+        "source": "proteinflow_data_SAbDabEntry",
+        "target": "proteinflow_data_ProteinEntry",
+        "label": "provides raw data for"
+      }
+    },
+    {
+      "data": {
+        "id": "edge_8",
+        "source": "proteinflow_processing",
+        "target": "proteinflow_data_ProteinEntry",
+        "label": "transforms into standardized objects"
       }
     }
   ]

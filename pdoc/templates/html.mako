@@ -29,7 +29,13 @@
   codeboarding_files = []
   codeboarding_dir = os.path.join(os.getcwd(), '.codeboarding')
   if os.path.exists(codeboarding_dir):
-    codeboarding_files = [os.path.basename(f) for f in glob.glob(os.path.join(codeboarding_dir, '*.html'))]
+    all_files = [os.path.basename(f) for f in glob.glob(os.path.join(codeboarding_dir, '*.html'))]
+    # Sort with on_boarding.html first, then alphabetically
+    codeboarding_files = []
+    if 'on_boarding.html' in all_files:
+      codeboarding_files.append('on_boarding.html')
+      all_files.remove('on_boarding.html')
+    codeboarding_files.extend(sorted(all_files))
 %>
 
 <%def name="ident(name)"><span class="ident">${name}</span></%def>
@@ -108,7 +114,7 @@
   classes = module.classes(sort=sort_identifiers)
   functions = module.functions(sort=sort_identifiers)
   submodules = module.submodules()
-  %>
+  %> 
 
   <%def name="show_func(f)">
     <dt id="${f.refname}"><code class="name flex">
@@ -365,11 +371,24 @@
     % endif
     
     % if codeboarding_files:
-    <li><h3>Codeboardings</h3>
+    <li><h3>Additional Resources</h3>
+      <ul>
+        <li><a href="on_boarding.html"><code>OnBoarding Guide</code></a></li>
+        <li><a href="visualize.html"><code>Visualization Guide</code></a></li>
+      </ul>
+    </li>
+    <li><h3>CodeBoardings</h3>
       <ul>
       % for file in codeboarding_files:
-        <li><a href="${file}"><code>${os.path.splitext(file)[0]}</code></a></li>
+        <li><a href="${file}"><code>${os.path.splitext(file)[0].replace("_", " ")}</code></a></li>
       % endfor
+      </ul>
+    </li>
+    % else:
+    <li><h3>Additional Resources</h3>
+      <ul>
+        <li><a href="on_boarding.html"><code>OnBoarding Guide</code></a></li>
+        <li><a href="visualize.html"><code>Visualization Guide</code></a></li>
       </ul>
     </li>
     % endif
